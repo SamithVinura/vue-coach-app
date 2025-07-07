@@ -1,3 +1,3 @@
 <template>
-  <h1></h1>
+  <h1>Requests</h1>
 </template>
