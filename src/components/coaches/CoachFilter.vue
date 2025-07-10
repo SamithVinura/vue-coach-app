@@ -4,9 +4,9 @@
     <span class="filter-option">
       <input type="checkbox" id="frontend" checked @change="setFilter" />
       <label for="frontend">Frontend</label>
-      <input type="checkbox" id="backend" @change="setFilter" />
+      <input type="checkbox" id="backend" checked @change="setFilter" />
       <label for="backend">Backend</label>
-      <input type="checkbox" id="career" @change="setFilter" />
+      <input type="checkbox" id="career" checked @change="setFilter" />
       <label for="career">Career</label>
     </span>
   </base-card>
