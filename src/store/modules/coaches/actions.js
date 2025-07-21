@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export default {
   async registerCoach(context, data) {
     const userId = context.rootGetters.userId;
@@ -8,7 +9,6 @@ export default {
       hourlyRate: data.rate,
       areas: data.areas,
     };
-    // eslint-disable-next-line no-unused-vars
     const response = await fetch(
       `https://vue-coach-app-b08e1-default-rtdb.firebaseio.com/coaches/${userId}.json`,
       {
@@ -24,5 +24,28 @@ export default {
       
     } */
     context.commit('registerCoach', { ...coachData, id: userId });
+  },
+  async loadCoaches(context) {
+    const response = await fetch(
+      `https://vue-coach-app-b08e1-default-rtdb.firebaseio.com/coaches.json`
+    );
+    const responseData = await response.json();
+    console.log('responseData', responseData);
+    if (!response.ok) {
+      return;
+    }
+    const coaches = [];
+    for (const key in responseData) {
+      const coach = {
+        id: key,
+        firstName: responseData[key].firstName,
+        lastName: responseData[key].lastname,
+        description: responseData[key].description,
+        hourlyRate: responseData[key].hourlyRate,
+        areas: responseData[key].areas,
+      };
+      coaches.push(coach);
+    }
+    context.commit('setCoaches', coaches);
   },
 };
