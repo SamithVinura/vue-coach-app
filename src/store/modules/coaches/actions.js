@@ -30,7 +30,6 @@ export default {
       `https://vue-coach-app-b08e1-default-rtdb.firebaseio.com/coaches.json`
     );
     const responseData = await response.json();
-    console.log('responseData', responseData);
     if (!response.ok) {
       return;
     }
@@ -39,7 +38,7 @@ export default {
       const coach = {
         id: key,
         firstName: responseData[key].firstName,
-        lastName: responseData[key].lastname,
+        lastName: responseData[key].lastName,
         description: responseData[key].description,
         hourlyRate: responseData[key].hourlyRate,
         areas: responseData[key].areas,
