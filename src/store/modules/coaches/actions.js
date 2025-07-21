@@ -17,12 +17,11 @@ export default {
       }
     );
 
-    /* const responseData = await response.json()
-    if(!response.ok){
-
-    }else{
-      
-    } */
+    const responseData = await response.json();
+    if (!response.ok) {
+      const error = new Error(responseData.message || 'Failed to fetch!');
+      throw error;
+    }
     context.commit('registerCoach', { ...coachData, id: userId });
   },
   async loadCoaches(context) {

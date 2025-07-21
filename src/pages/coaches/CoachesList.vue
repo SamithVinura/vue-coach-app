@@ -1,5 +1,8 @@
 <!-- eslint-disable no-unused-vars -->
 <template>
+  <base-dialog :show="!!error" title="An error occured!" @close="handleError">
+    <p>{{ error }}</p></base-dialog
+  >
   <section>
     <coach-filter @change-filter="setFilters"></coach-filter>
   </section>
@@ -41,6 +44,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      error: null,
       activeFilters: {
         frontend: true,
         backend: true,
@@ -80,8 +84,16 @@ export default {
     },
     async laodCoaches() {
       this.isLoading = true;
-      await this.$store.dispatch('coaches/loadCoaches');
-      this.isLoading = false;
+      try {
+        await this.$store.dispatch('coaches/loadCoaches');
+        this.isLoading = false;
+      } catch (e) {
+        this.error = e.message || 'Something went wrong !';
+      }
+    },
+
+    handleError() {
+      this.error = null;
     },
   },
 };
