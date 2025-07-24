@@ -79,11 +79,12 @@ export default {
             password: this.password,
           });
         }
-        this.isLoading = false;
+        const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
+        this.$router.replace(redirectUrl);
       } catch (e) {
-        this.isLoading = false;
         this.error = e.message || 'Authentication failed!';
       }
+      this.isLoading = false;
     },
     switchAuthMode() {
       if (this.mode === 'login') {
