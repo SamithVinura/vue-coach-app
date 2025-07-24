@@ -25,9 +25,10 @@ export default {
   },
   async fetchRequests(context) {
     const id = context.rootGetters.userId;
-
+    const token = context.rootGetters.token;
     const response = await fetch(
-      `https://vue-coach-app-b08e1-default-rtdb.firebaseio.com/requests/${id}.json`
+      `https://vue-coach-app-b08e1-default-rtdb.firebaseio.com/requests/${id}.json?auth=` +
+        token
     );
     const responseData = await response.json();
     if (!response.ok) {
